@@ -1,0 +1,45 @@
+//Install
+Win64OpenSSL-1_1_0h
+Add to the path C:\OpenSSL-Win64
+set OPENSSL_CONF=c:/libs/openssl-0.9.8k/openssl.cnf
+
+
+//Crea un self signing certificate (usa la clave my_key.pem para firmar el certificado de la propia clave my_key.pem)
+//openssl x509 -req -in my_csr.pem -signkey my_key.pem -out my_cert.pem
+
+
+//Crea clave privada
+genrsa -out jwtRS256.key 2048
+//Crea solicitud de certificado
+req -new -key jwtRS256.key -out jwtRS256_req.pem
+//Crea un self signing certificate (usa la clave my_key.pem para firmar el certificado de la propia clave my_key.pem)
+//openssl x509 -req -in jwtRS256_req.pem -signkey jwtRS256.key -out jwtRS256.pem
+
+
+//Lo hace todo de una tirada
+req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
+
+//NOTA
+
+//Si la clave privada empieza por -----BEGIN PRIVATE KEY-----, el formato es el nuevo. La libraria solo soporta el nuevo formato
+//Si la clave empieza por -----BEGIN RSA PRIVATE KEY-----, el formato es el viejo.
+//Para convertir del viejo al nuevo formato:
+pkcs8 -topk8 -nocrypt -in jwtRS256.key -out jwtRS256_old.key
+
+//Luego hay que generar de nuevo el certificado con la clave publica
+req -new -key jwtRS256_old.key -out jwtRS256_req_old.pem
+openssl x509 -req -in jwtRS256_req_old.pem -signkey jwtRS256_old.key -out jwtRS256_old.pem
+
+
+
+RESUMEN
+//Pasos a seguir
+Open openssl, and then:
+
+genrsa -out jwtRS256_1.key 2048
+pkcs8 -topk8 -nocrypt -in jwtRS256_1.key -out jwtRS256_1_old.key
+req -new -key jwtRS256_1_old.key -out jwtRS256_1_old_req.pem
+x509 -req -in jwtRS256_1_old_req.pem -signkey jwtRS256_1_old.key -out jwtRS256_1_old.pem
+
+
