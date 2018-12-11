@@ -1,7 +1,7 @@
 //Install
 Win64OpenSSL-1_1_0h
 Add to the path C:\OpenSSL-Win64
-set OPENSSL_CONF=c:/libs/openssl-0.9.8k/openssl.cnf
+set OPENSSL_CONF=C:\OpenSSL-Win64\bin\cnf\openssl.cnf
 
 
 //Crea un self signing certificate (usa la clave my_key.pem para firmar el certificado de la propia clave my_key.pem)
