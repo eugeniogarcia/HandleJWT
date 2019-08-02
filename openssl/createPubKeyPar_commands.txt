@@ -47,5 +47,8 @@ El pfx es un formato para distribuir el certificado.
 
 pkcs12 -export -in jwtRS256_1_old.pem -inkey jwtRS256_1_old.key -out jwtRS256_1_old.pfx
 
+EXTRA 1. Get the public key from the private key
+rsa -in jwtRS256_1_old.key -pubout
+
 
 
