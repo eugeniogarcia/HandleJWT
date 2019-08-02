@@ -42,4 +42,10 @@ pkcs8 -topk8 -nocrypt -in jwtRS256_1.key -out jwtRS256_1_old.key
 req -new -key jwtRS256_1_old.key -out jwtRS256_1_old_req.pem
 x509 -req -in jwtRS256_1_old_req.pem -signkey jwtRS256_1_old.key -out jwtRS256_1_old.pem
 
+EXTRA. Crear un pfx
+El pfx es un formato para distribuir el certificado.
+
+pkcs12 -export -in jwtRS256_1_old.pem -inkey jwtRS256_1_old.key -out jwtRS256_1_old.pfx
+
+
 
