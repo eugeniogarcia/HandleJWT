@@ -50,5 +50,6 @@ pkcs12 -export -in jwtRS256_1_old.pem -inkey jwtRS256_1_old.key -out jwtRS256_1_
 EXTRA 1. Get the public key from the private key
 rsa -in jwtRS256_1_old.key -pubout
 
-
+EXTRA 2. See contents of a cert
+keytool -printcert -file .\ORWATREDLDNUKW01.uk.corporg.net.pem
 
