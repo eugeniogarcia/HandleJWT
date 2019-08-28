@@ -17,3 +17,6 @@ rsa -in euge.key -pubout
 
 #Mostramos el contenido del certificado
 keytool -printcert -file .\euge.pem
+
+# UPDATE. How to create a .crt from a .pem
+openssl x509 -outform der -in euge.pem -out euge.crt
